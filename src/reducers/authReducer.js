@@ -1,4 +1,4 @@
-import { typeAuth } from '../types/types';
+import { typeGState } from '../types/types';
 
 // state = {
 //   username: 'pedro',
@@ -9,30 +9,30 @@ import { typeAuth } from '../types/types';
 
 export const authReducer = (state = {}, action) => {
   switch (action.type) {
-    case typeAuth.login:
+    case typeGState.login:
       return {
         username: action.payload,
         logged: true,
       };
 
-    case typeAuth.logout:
+    case typeGState.logout:
       return {
         logged: false,
       };
 
-    case typeAuth.pplLists:
+    case typeGState.pplLists:
       return {
         ...state,
         active: {},
       };
 
-    case typeAuth.pplGetOne:
+    case typeGState.pplGetOne:
       return {
         ...state,
         active: action.payload,
       };
 
-    case typeAuth.pplCreate:
+    case typeGState.pplCreate:
       return {
         ...state,
         list: [...state.list, action.payload],

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { AppContext } from '../../reducers/AppContext';
-import { typeAuth } from '../../types/types';
+import { typeGState } from '../../types/types';
 
 const peopleData = [
   {
@@ -67,7 +67,7 @@ export const PeopleScreen = ({ history }) => {
   const handleSelect = (peopleID) => {
     const peopleItem = peopleData.find((item) => item._id === peopleID);
     dispatch({
-      type: typeAuth.pplGetOne,
+      type: typeGState.pplGetOne,
       payload: peopleItem,
     });
     history.push(`/datos/persona/${peopleID}`);

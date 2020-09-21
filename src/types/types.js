@@ -1,4 +1,4 @@
-export const typeAuth = {
+export const typeGState = {
   login: '[auth] login',
   logout: '[auth] logout',
 

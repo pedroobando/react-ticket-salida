@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../reducers/AppContext';
-import { typeAuth } from '../../types/types';
+import { typeGState } from '../../types/types';
 
 export const NavBar = ({ history }) => {
   const {
@@ -12,7 +12,7 @@ export const NavBar = ({ history }) => {
 
   const handleLogout = () => {
     dispatch({
-      type: typeAuth.logout,
+      type: typeGState.logout,
     });
   };
 

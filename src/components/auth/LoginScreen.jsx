@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../reducers/AppContext';
-import { typeAuth } from '../../types/types';
+import { typeGState } from '../../types/types';
 // import { Link } from 'react-router-dom';
 
 export const LoginScreen = ({ history }) => {
@@ -8,7 +8,7 @@ export const LoginScreen = ({ history }) => {
 
   const handleLogin = () => {
     dispatch({
-      type: typeAuth.login,
+      type: typeGState.login,
       payload: 'Pedro',
     });
     // console.log('Acceso');
