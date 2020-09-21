@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../reducers/AppContext';
 import { typeAuth } from '../../types/types';
@@ -24,24 +24,24 @@ export const NavBar = ({ history }) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/salidas">
+          <Nav.Link as={Link} to="/salida">
             Salidas
           </Nav.Link>
           <NavDropdown title="Datos" id="collasible-nav-dropdown">
-            <NavDropdown.Item as={Link} to="/datos/personas">
+            <NavDropdown.Item as={Link} to="/datos/persona">
               Personas
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item as={Link} to="/datos/usuarios">
+            <NavDropdown.Item as={Link} to="/datos/usuario">
               Usuarios
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Nav>
           <Nav.Link href="#deets">{username}</Nav.Link>
-          {/* <Nav.Link eventKey={2} href="#memes">
-            Dank memes
-          </Nav.Link> */}
+          <Button variant="link" onClick={handleLogout}>
+            Logout
+          </Button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

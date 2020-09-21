@@ -3,6 +3,8 @@ import { typeAuth } from '../types/types';
 // state = {
 //   username: 'pedro',
 //   logged: true,
+//   list:[],
+//   active:{}
 // };
 
 export const authReducer = (state = {}, action) => {
@@ -16,6 +18,25 @@ export const authReducer = (state = {}, action) => {
     case typeAuth.logout:
       return {
         logged: false,
+      };
+
+    case typeAuth.pplLists:
+      return {
+        ...state,
+        active: {},
+      };
+
+    case typeAuth.pplGetOne:
+      return {
+        ...state,
+        active: action.payload,
+      };
+
+    case typeAuth.pplCreate:
+      return {
+        ...state,
+        list: [...state.list, action.payload],
+        active: {},
       };
 
     default:

@@ -5,7 +5,7 @@ export const SalidaScreen = () => {
     <div>
       <h1>Salidas Screen</h1>
 
-      <table class="table table-hover">
+      <table className="table table-hover">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -29,7 +29,7 @@ export const SalidaScreen = () => {
           </tr>
           <tr>
             <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
+            <td>Larry the Bird</td>
             <td>@twitter</td>
           </tr>
         </tbody>

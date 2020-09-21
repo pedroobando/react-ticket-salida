@@ -6,6 +6,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import { SalidaScreen } from '../components/salidas/SalidaScreen';
 
 import { PeopleScreen } from '../components/datas/PeopleScreen';
+import { PeopleEdit } from '../components/datas/PeopleEdit';
 import { UserScreen } from '../components/datas/UserScreen';
 
 export const MainRouter = () => {
@@ -14,12 +15,13 @@ export const MainRouter = () => {
       <NavBar />
       <div className="container mt-3">
         <Switch>
-          <Route exact path="/salidas" component={SalidaScreen} />
+          <Route exact path="/salida" component={SalidaScreen} />
 
-          <Route exact path="/datos/personas" component={PeopleScreen} />
-          <Route exact path="/datos/usuarios" component={UserScreen} />
+          <Route exact path="/datos/persona" component={PeopleScreen} />
+          <Route path="/datos/persona/:id" component={PeopleEdit} />
+          <Route exact path="/datos/usuario" component={UserScreen} />
 
-          <Redirect to="/salidas" />
+          <Redirect to="/salida" />
         </Switch>
       </div>
     </>

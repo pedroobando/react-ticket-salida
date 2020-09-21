@@ -1,12 +1,11 @@
 export const typeAuth = {
   login: '[auth] login',
   logout: '[auth] logout',
-};
 
-export const typeCRUD = {
-  create: '[CRUD] Create',
-  read: '[CRUD] Reading',
-  update: '[CRUD] Updating',
-  delete: '[CRUD] erasing',
-  getOne: '[CRUD] Get One',
+  pplCreate: '[peop] create',
+  pplRead: '[peop] reading',
+  pplUpdate: '[peop] Updating',
+  pplDelete: '[peop] erasing',
+  pplGetOne: '[peop] get One',
+  pplLists: '[peop] lista all',
 };

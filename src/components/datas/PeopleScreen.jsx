@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Button } from 'react-bootstrap';
+import { AppContext } from '../../reducers/AppContext';
+import { typeAuth } from '../../types/types';
 
 const peopleData = [
   {
@@ -45,34 +48,72 @@ const peopleData = [
   },
 ];
 
-export const PeopleScreen = () => {
+// const initialForm = {
+//   _id: 0,
+//   name: '',
+//   dni: '',
+//   phone: '',
+//   coments: '',
+//   approver: false,
+//   transPlaca: '',
+//   transBrand: '',
+//   transModel: '',
+//   transColor: '',
+// };
+
+export const PeopleScreen = ({ history }) => {
+  const { dispatch } = useContext(AppContext);
+
+  const handleSelect = (peopleID) => {
+    const peopleItem = peopleData.find((item) => item._id === peopleID);
+    dispatch({
+      type: typeAuth.pplGetOne,
+      payload: peopleItem,
+    });
+    history.push(`/datos/persona/${peopleID}`);
+
+    // return <PeopleEdit />;
+
+    // console.log(peopleItem);
+  };
+
+  // const handleUpdate = () => {
+  //   console.log('Actualizado');
+  // };
+
+  // const handleDeleted = () => {
+  //   console.log('Eliminado');
+  // };
+
+  const ListPeoples = ({ _id, name, dni, phone, transport }) => (
+    <tr key={_id}>
+      <th scope="row">{dni}</th>
+      <td>{name}</td>
+      <td>{phone}</td>
+      <td>{transport.placa}</td>
+      <td colSpan="2">
+        <Button onClick={(e) => handleSelect(_id)}>Edit</Button>
+      </td>
+    </tr>
+  );
+
   return (
     <div>
       <div className="d-flex justify-content-end mr-2">
         <span className="h3">Personas / Aprobadores</span>
       </div>
 
-      <table class="table table-hover">
-        <thead class="thead-dark">
+      <table className="table table-hover">
+        <thead className="thead-dark">
           <tr>
             <th scope="col">CI / RIF</th>
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
             <th scope="col">Transporte (placa)</th>
+            <th></th>
           </tr>
         </thead>
-        <tbody>
-          {peopleData.map(({ _id, name, dni, phone, transport }) => {
-            return (
-              <tr key={_id}>
-                <th scope="row">{dni}</th>
-                <td>{name}</td>
-                <td>{phone}</td>
-                <td>{transport.placa}</td>
-              </tr>
-            );
-          })}
-        </tbody>
+        <tbody>{peopleData.map(ListPeoples)}</tbody>
       </table>
     </div>
   );
