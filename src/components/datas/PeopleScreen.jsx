@@ -9,57 +9,38 @@ const peopleData = [
     name: 'Juan Carlos',
     dni: '3232323',
     phone: '032-323232',
-    coments: '',
     approver: true,
-    transport: {
-      placa: '222222',
-      brand: '23232323',
-      model: '23232323',
-      color: '323223',
-    },
+    coments: 'Algun comentario',
+    transBrand: 'Toyota',
+    transColor: 'Plata',
+    transModel: 'Meru',
+    transPlaca: 'NAU-39K',
   },
   {
     _id: 244323,
     name: 'Luis Martinez',
     dni: '3232323',
     phone: '032-323232',
-    coments: '',
-    approver: true,
-    transport: {
-      placa: '222222',
-      brand: '23232323',
-      model: '23232323',
-      color: '323223',
-    },
+    approver: false,
+    coments: 'tario',
+    transBrand: 'Chevroolet',
+    transColor: 'Azul',
+    transModel: 'Monza',
+    transPlaca: 'GTE-39K',
   },
   {
     _id: 24432223,
     name: 'Francisco Perez',
     dni: '3232323',
     phone: '032-323232',
-    coments: '',
     approver: true,
-    transport: {
-      placa: '222222',
-      brand: '23232323',
-      model: '23232323',
-      color: '323223',
-    },
+    coments: 'Comentario true',
+    transBrand: 'Toyota',
+    transColor: 'Gris',
+    transModel: 'Starlet',
+    transPlaca: 'BAH-12P',
   },
 ];
-
-// const initialForm = {
-//   _id: 0,
-//   name: '',
-//   dni: '',
-//   phone: '',
-//   coments: '',
-//   approver: false,
-//   transPlaca: '',
-//   transBrand: '',
-//   transModel: '',
-//   transColor: '',
-// };
 
 export const PeopleScreen = ({ history }) => {
   const { dispatch } = useContext(AppContext);
@@ -68,29 +49,17 @@ export const PeopleScreen = ({ history }) => {
     const peopleItem = peopleData.find((item) => item._id === peopleID);
     dispatch({
       type: typeGState.pplGetOne,
-      payload: peopleItem,
+      payload: { active: peopleItem, list: peopleData },
     });
     history.push(`/datos/persona/${peopleID}`);
-
-    // return <PeopleEdit />;
-
-    // console.log(peopleItem);
   };
 
-  // const handleUpdate = () => {
-  //   console.log('Actualizado');
-  // };
-
-  // const handleDeleted = () => {
-  //   console.log('Eliminado');
-  // };
-
-  const ListPeoples = ({ _id, name, dni, phone, transport }) => (
+  const ListPeoples = ({ _id, name, dni, phone, transPlaca }) => (
     <tr key={_id}>
       <th scope="row">{dni}</th>
       <td>{name}</td>
       <td>{phone}</td>
-      <td>{transport.placa}</td>
+      <td>{transPlaca}</td>
       <td colSpan="2">
         <Button onClick={(e) => handleSelect(_id)}>Edit</Button>
       </td>

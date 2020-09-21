@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 // Utilidad: Leer los textbox o cajas de texto cuando el input change cambie del formulario
 
@@ -7,7 +7,7 @@ export const useForm = (initialState = {}) => {
 
   const handleInputChange = ({ target }) => {
     // verifica el inputBox
-    const value = target.type === "checkbox" ? target.checked : target.value;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
     setValues({ ...values, [target.name]: value });
   };
 
@@ -17,4 +17,3 @@ export const useForm = (initialState = {}) => {
 
   return [values, handleInputChange, reset];
 };
-
