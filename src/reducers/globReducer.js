@@ -7,7 +7,7 @@ import { typeGState } from '../types/types';
 //   active:{}
 // };
 
-export const authReducer = (state = {}, action) => {
+export const globReducer = (state = {}, action) => {
   switch (action.type) {
     case typeGState.login:
       return {

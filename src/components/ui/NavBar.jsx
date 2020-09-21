@@ -6,7 +6,7 @@ import { typeGState } from '../../types/types';
 
 export const NavBar = ({ history }) => {
   const {
-    user: { username },
+    globalState: { username },
     dispatch,
   } = useContext(AppContext);
 

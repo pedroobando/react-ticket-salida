@@ -5,13 +5,12 @@ import { AppContext } from '../reducers/AppContext';
 
 import { AuthRouter } from './AuthRouter';
 import { MainRouter } from './MainRouter';
-// import { login } from '../actions/auth';
 
 import { PrivateRouter } from './PrivateRouter';
 import { PublicRouter } from './PublicRouter';
 
 export const AppRouter = () => {
-  const { user } = useContext(AppContext);
+  const { globalState } = useContext(AppContext);
 
   return (
     <Router>
@@ -19,13 +18,13 @@ export const AppRouter = () => {
         <Switch>
           <PublicRouter
             path="/auth"
-            isAuthenticated={user.logged}
+            isAuthenticated={globalState.logged}
             component={AuthRouter}
           />
           <PrivateRouter
             path="/"
             // exact
-            isAuthenticated={user.logged}
+            isAuthenticated={globalState.logged}
             component={MainRouter}
           />
 

@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 import { AppContext } from './reducers/AppContext';
-import { authReducer } from './reducers/authReducer';
+import { globReducer } from './reducers/globReducer';
 
 import { AppRouter } from './routers/AppRouter';
 
@@ -10,10 +10,10 @@ const init = () => {
 const initialState = {};
 
 export const TicketApp = () => {
-  const [user, dispatch] = useReducer(authReducer, initialState, init);
+  const [globalState, dispatch] = useReducer(globReducer, initialState, init);
 
   return (
-    <AppContext.Provider value={{ user, dispatch }}>
+    <AppContext.Provider value={{ globalState, dispatch }}>
       <AppRouter />
     </AppContext.Provider>
   );
