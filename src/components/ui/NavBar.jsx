@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Link, NavLink, useHistory } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { AppContext } from '../../reducers/AppContext';
 import { typeAuth } from '../../types/types';
 
-export const NavBar = () => {
-  const history = useHistory();
+export const NavBar = ({ history }) => {
   const {
-    user: { name },
+    user: { username },
     dispatch,
   } = useContext(AppContext);
 
@@ -14,49 +14,36 @@ export const NavBar = () => {
     dispatch({
       type: typeAuth.logout,
     });
-    history.replace('/login');
   };
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
-      <Link className="navbar-brand" to="/">
-        Asociaciones
-      </Link>
-
-      <div className="navbar-collapse">
-        <div className="navbar-nav">
-          <NavLink
-            activeClassName="active"
-            className="nav-item nav-link"
-            exact
-            to="/marvel">
-            Marvel
-          </NavLink>
-
-          <NavLink activeClassName="active" className="nav-item nav-link" exact to="/dc">
-            DC
-          </NavLink>
-
-          <NavLink
-            activeClassName="active"
-            className="nav-item nav-link"
-            exact
-            to="/search">
-            Search&nbsp;Hero
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-        <ul className="navbar-nav ml-auto">
-          <span className="nav-item nav-link text-info">{name}</span>
-          <button
-            className="nav-item nav-link btn btn-outline-secondary"
-            onClick={handleLogout}>
-            Logout
-          </button>
-        </ul>
-      </div>
-    </nav>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar.Brand as={Link} to="/">
+        React-Bootstrap
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <Nav.Link as={Link} to="/salidas">
+            Salidas
+          </Nav.Link>
+          <NavDropdown title="Datos" id="collasible-nav-dropdown">
+            <NavDropdown.Item as={Link} to="/datos/personas">
+              Personas
+            </NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item as={Link} to="/datos/usuarios">
+              Usuarios
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+        <Nav>
+          <Nav.Link href="#deets">{username}</Nav.Link>
+          {/* <Nav.Link eventKey={2} href="#memes">
+            Dank memes
+          </Nav.Link> */}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };

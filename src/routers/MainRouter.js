@@ -12,12 +12,12 @@ export const MainRouter = () => {
   return (
     <>
       <NavBar />
-      <div className="container-fluid mt-3">
+      <div className="container mt-3">
         <Switch>
           <Route exact path="/salidas" component={SalidaScreen} />
 
-          <Route exact path="/datos/persona" component={PeopleScreen} />
-          <Route exact path="/datos/usuario" component={UserScreen} />
+          <Route exact path="/datos/personas" component={PeopleScreen} />
+          <Route exact path="/datos/usuarios" component={UserScreen} />
 
           <Redirect to="/salidas" />
         </Switch>

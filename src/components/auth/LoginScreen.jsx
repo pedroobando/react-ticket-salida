@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../reducers/AppContext';
+import { typeAuth } from '../../types/types';
 // import { Link } from 'react-router-dom';
 
 export const LoginScreen = ({ history }) => {
+  const { dispatch } = useContext(AppContext);
+
   const handleLogin = () => {
-    console.log('Acceso');
+    dispatch({
+      type: typeAuth.login,
+      payload: 'Pedro',
+    });
+    // console.log('Acceso');
   };
 
   const handleRecovery = () => {
