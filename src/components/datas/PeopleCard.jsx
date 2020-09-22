@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import { Form } from 'react-bootstrap';
 import { AppContext } from '../../reducers/AppContext';
 import { useForm } from '../../hooks/useForm';
-// import { globReducer } from '../../reducers/globReducer';
 import { typeGState } from '../../types/types';
-import { getStorage, setStorage } from '../../data/dataStorage';
+import { createPeople, updatePeople } from '../../actions/peopleAction';
 
 export const PeopleCard = ({ history }) => {
   const {
@@ -29,32 +28,21 @@ export const PeopleCard = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const getListPeople = getStorage('people');
-
     if (active._id === 0) {
-      createNewPeople(getListPeople);
+      const listPeople = createPeople(formValues);
+      dispatch({
+        type: typeGState.pplCreate,
+        payload: listPeople,
+      });
     } else {
-      updatePeople(getListPeople);
+      const listPeople = updatePeople(formValues);
+      dispatch({
+        type: typeGState.pplUpdate,
+        payload: listPeople,
+      });
     }
 
     history.goBack();
-  };
-
-  const createNewPeople = (list) => {
-    console.log(list);
-    dispatch({
-      type: typeGState.pplCreate,
-      payload: { active: formValues, list },
-    });
-    // setStorage('people', [formValues, ...list]);
-  };
-
-  const updatePeople = (list) => {
-    dispatch({
-      type: typeGState.pplUpdate,
-      payload: { active: formValues, list },
-    });
-    // setStorage('people', list);
   };
 
   const handleVolver = () => {

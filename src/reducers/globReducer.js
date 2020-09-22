@@ -1,4 +1,3 @@
-import { setStorage } from '../data/dataStorage';
 import { typeGState } from '../types/types';
 
 // state = {
@@ -38,24 +37,20 @@ export const globReducer = (state = {}, action) => {
       return {
         ...state,
         list: [],
-        active: {},
+        active: { _id: 0 },
       };
 
     case typeGState.pplCreate:
-      setStorage('people', [action.payload.active, ...action.payload.list]);
       return {
         ...state,
-        list: [action.payload.active, ...action.payload.list],
+        list: action.payload,
         active: {},
       };
 
     case typeGState.pplUpdate:
-      const { _id } = action.payload.active;
-      const newList = action.payload.list.filter((item) => item._id !== _id);
-      setStorage('people', [action.payload.active, ...newList]);
       return {
         ...state,
-        list: [action.payload.active, ...newList],
+        list: action.payload,
         active: {},
       };
 

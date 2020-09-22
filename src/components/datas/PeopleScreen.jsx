@@ -1,86 +1,37 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
-import { getStorage } from '../../data/dataStorage';
-import { AppContext } from '../../reducers/AppContext';
+import React, { useEffect, useState, useContext } from 'react';
 import { typeGState } from '../../types/types';
-
-// const peopleData = [
-//   {
-//     _id: 23232323,
-//     name: 'Juan Carlos',
-//     dni: '3232323',
-//     phone: '032-323232',
-//     approver: true,
-//     coments: 'Algun comentario',
-//     transBrand: 'Toyota',
-//     transColor: 'Plata',
-//     transModel: 'Meru',
-//     transPlaca: 'NAU-39K',
-//   },
-//   {
-//     _id: 244323,
-//     name: 'Luis Martinez',
-//     dni: '3232323',
-//     phone: '032-323232',
-//     approver: false,
-//     coments: 'tario',
-//     transBrand: 'Chevroolet',
-//     transColor: 'Azul',
-//     transModel: 'Monza',
-//     transPlaca: 'GTE-39K',
-//   },
-//   {
-//     _id: 24432223,
-//     name: 'Francisco Perez',
-//     dni: '3232323',
-//     phone: '032-323232',
-//     approver: true,
-//     coments: 'Comentario true',
-//     transBrand: 'Toyota',
-//     transColor: 'Gris',
-//     transModel: 'Starlet',
-//     transPlaca: 'BAH-12P',
-//   },
-// ];
+import { AppContext } from '../../reducers/AppContext';
+import { getOnePeople, listPeople } from '../../actions/peopleAction';
 
 export const PeopleScreen = ({ history }) => {
-  const { dispatch } = useContext(AppContext);
-
   const [lstPeople, setLstPeople] = useState([]);
+  const { dispatch } = useContext(AppContext);
 
   useEffect(() => {
     loadTable();
   }, []);
 
   const loadTable = () => {
-    setLstPeople(getStorage('people'));
+    const lista = listPeople();
+    setLstPeople(lista);
+    // dispatch({
+    //   type: typeGState.pplLists,
+    //   payload: listPeople,
+    // });
   };
 
   const handleAddNew = () => {
-    // const peopleItem = {
-    //   _id: 0,
-    //   name: '',
-    //   dni: '',
-    //   phone: '',
-    //   approver: false,
-    //   coments: '',
-    //   transBrand: '',
-    //   transColor: '',
-    //   transModel: '',
-    //   transPlaca: '',
-    // };
     dispatch({
       type: typeGState.pplAddNew,
-      payload: lstPeople,
     });
+    // addNewPeople();
     history.push(`/datos/persona/nuevo`);
   };
 
   const handleSelect = (peopleID) => {
-    const peopleItem = lstPeople.find((item) => item._id === peopleID);
     dispatch({
       type: typeGState.pplGetOne,
-      payload: { active: peopleItem, list: lstPeople },
+      payload: getOnePeople(peopleID),
     });
     history.push(`/datos/persona/${peopleID}`);
   };
@@ -92,7 +43,11 @@ export const PeopleScreen = ({ history }) => {
       <td>{phone}</td>
       <td>{transPlaca}</td>
       <td colSpan="2">
-        <Button onClick={(e) => handleSelect(_id)}>Edit</Button>
+        <button
+          className="btn btn-outline-secondary btn-sm"
+          onClick={(event) => handleSelect(_id)}>
+          Edit
+        </button>
       </td>
     </tr>
   );
