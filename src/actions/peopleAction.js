@@ -76,3 +76,16 @@ export const updatePeople = (people) => {
     throw err;
   }
 };
+
+export const deletePeople = (peopleID) => {
+  try {
+    const listStorage = getStorage(table);
+    const listDeleteItem = listStorage.filter((item) => item._id !== peopleID);
+    const newList = [...listDeleteItem];
+    setStorage(table, newList);
+    return newList;
+  } catch (err) {
+    console.error('deletePeople - ', err.message);
+    throw err;
+  }
+};

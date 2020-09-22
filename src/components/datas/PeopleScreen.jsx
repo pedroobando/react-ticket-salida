@@ -14,17 +14,12 @@ export const PeopleScreen = ({ history }) => {
   const loadTable = () => {
     const lista = listPeople();
     setLstPeople(lista);
-    // dispatch({
-    //   type: typeGState.pplLists,
-    //   payload: listPeople,
-    // });
   };
 
   const handleAddNew = () => {
     dispatch({
       type: typeGState.pplAddNew,
     });
-    // addNewPeople();
     history.push(`/datos/persona/nuevo`);
   };
 
@@ -37,31 +32,33 @@ export const PeopleScreen = ({ history }) => {
   };
 
   const ListPeoples = ({ _id, name, dni, phone, transPlaca }) => (
-    <tr key={_id}>
+    <tr key={_id} onClick={(event) => handleSelect(_id)}>
       <th scope="row">{dni}</th>
       <td>{name}</td>
       <td>{phone}</td>
       <td>{transPlaca}</td>
-      <td colSpan="2">
+      {/* <td colSpan="2">
         <button
-          className="btn btn-outline-secondary btn-sm"
+          className="btn btn-outline-secondary btn-sm px-2"
           onClick={(event) => handleSelect(_id)}>
-          Edit
+          Datos
         </button>
-      </td>
+      </td> */}
     </tr>
   );
 
   return (
     <div>
-      <div className="d-flex justify-content-between mx-2 mb-2">
+      <div className="d-flex justify-content-between">
         <button
-          className="btn btn-outline-primary btn-sm"
+          className="align-self-baseline btn btn-outline-primary btn-sm"
           onClick={(event) => handleAddNew()}>
           Nuevo
         </button>
+
         <span className="h3">Personas / Aprobadores</span>
       </div>
+      <div className="row"></div>
 
       <table className="table table-hover">
         <thead className="thead-dark">
@@ -69,8 +66,14 @@ export const PeopleScreen = ({ history }) => {
             <th scope="col">CI / RIF</th>
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
-            <th scope="col">Transporte (placa)</th>
-            <th></th>
+            <th scope="col-1">Tramp. /placa</th>
+            {/* <th>
+              <button
+                className="btn btn-outline-primary btn-sm"
+                onClick={(event) => handleAddNew()}>
+                Nuevo
+              </button>
+            </th> */}
           </tr>
         </thead>
         <tbody>{lstPeople.map(ListPeoples)}</tbody>
