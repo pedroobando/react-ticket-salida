@@ -19,6 +19,18 @@ export const PeopleScreen = ({ history }) => {
   const handleAddNew = () => {
     dispatch({
       type: typeGState.pplAddNew,
+      payload: {
+        _id: 0,
+        dni: '',
+        name: '',
+        phone: '',
+        coments: '',
+        approver: false,
+        transPlaca: '',
+        transBrand: '',
+        transColor: '',
+        transModel: '',
+      },
     });
     history.push(`/datos/persona/nuevo`);
   };
@@ -37,13 +49,6 @@ export const PeopleScreen = ({ history }) => {
       <td>{name}</td>
       <td>{phone}</td>
       <td>{transPlaca}</td>
-      {/* <td colSpan="2">
-        <button
-          className="btn btn-outline-secondary btn-sm px-2"
-          onClick={(event) => handleSelect(_id)}>
-          Datos
-        </button>
-      </td> */}
     </tr>
   );
 
@@ -67,13 +72,6 @@ export const PeopleScreen = ({ history }) => {
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
             <th scope="col-1">Tramp. /placa</th>
-            {/* <th>
-              <button
-                className="btn btn-outline-primary btn-sm"
-                onClick={(event) => handleAddNew()}>
-                Nuevo
-              </button>
-            </th> */}
           </tr>
         </thead>
         <tbody>{lstPeople.map(ListPeoples)}</tbody>

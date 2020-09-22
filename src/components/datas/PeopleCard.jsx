@@ -13,7 +13,7 @@ export const PeopleCard = ({ history }) => {
     dispatch,
   } = useContext(AppContext);
 
-  const [formValues, handleInputChange, reset] = useForm(active);
+  const [formValues, handleInputChange] = useForm(active);
 
   const {
     name,
@@ -30,7 +30,7 @@ export const PeopleCard = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (active._id === '0') {
+    if (active._id === 0) {
       const listPeople = createPeople(formValues);
       dispatch({
         type: typeGState.pplCreate,
@@ -49,20 +49,6 @@ export const PeopleCard = ({ history }) => {
 
   const handleVolver = () => {
     history.goBack();
-  };
-
-  const handleClear = () => {
-    reset({
-      name: '',
-      dni: '',
-      phone: '',
-      coments: '',
-      approver: false,
-      transBrand: '',
-      transColor: '',
-      transModel: '',
-      transPlaca: '',
-    });
   };
 
   const handleDelete = () => {
@@ -174,6 +160,7 @@ export const PeopleCard = ({ history }) => {
       <Form.Group controlId="formBasicComents">
         <Form.Label>Comentario</Form.Label>
         <Form.Control
+          rows={5}
           as="textarea"
           type="text"
           name="coments"

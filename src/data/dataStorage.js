@@ -1,7 +1,7 @@
 export const getStorage = (table) => {
   try {
     if (table.trim().lenght <= 1) return [];
-    const retStringData = localStorage.getItem(table) || [];
+    const retStringData = localStorage.getItem(table) || '[]';
     return JSON.parse(retStringData);
   } catch (error) {
     console.error('Error en dataStorage - getStorage', error);

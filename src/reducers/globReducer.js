@@ -37,7 +37,7 @@ export const globReducer = (state = {}, action) => {
       return {
         ...state,
         list: [],
-        active: { _id: 0 },
+        active: action.payload,
       };
 
     case typeGState.pplCreate:

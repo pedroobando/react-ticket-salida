@@ -8,6 +8,7 @@ import { SalidaScreen } from '../components/salidas/SalidaScreen';
 import { PeopleScreen } from '../components/datas/PeopleScreen';
 import { PeopleCard } from '../components/datas/PeopleCard';
 import { UserScreen } from '../components/datas/UserScreen';
+import { UserCard } from '../components/datas/UserCard';
 
 export const MainRouter = () => {
   return (
@@ -20,6 +21,7 @@ export const MainRouter = () => {
           <Route exact path="/datos/persona" component={PeopleScreen} />
           <Route path="/datos/persona/:id" component={PeopleCard} />
           <Route exact path="/datos/usuario" component={UserScreen} />
+          <Route path="/datos/usuario/:id" component={UserCard} />
 
           <Redirect to="/salida" />
         </Switch>
