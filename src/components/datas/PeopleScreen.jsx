@@ -61,7 +61,7 @@ export const PeopleScreen = ({ history }) => {
           Nuevo
         </button>
 
-        <span className="h3">Personas / Aprobadores</span>
+        <span className="h3">Personas</span>
       </div>
       <div className="row"></div>
 
@@ -71,7 +71,7 @@ export const PeopleScreen = ({ history }) => {
             <th scope="col">CI / RIF</th>
             <th scope="col">Nombre</th>
             <th scope="col">Telefono</th>
-            <th scope="col-1">Tramp. /placa</th>
+            <th scope="col-1">Placa</th>
           </tr>
         </thead>
         <tbody>{lstPeople.map(ListPeoples)}</tbody>

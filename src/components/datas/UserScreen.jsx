@@ -12,7 +12,9 @@ export const UserScreen = ({ history }) => {
   }, []);
 
   const loadTable = () => {
-    const lista = listUser();
+    let lista = listUser();
+    console.log(lista);
+
     setLstUser(lista);
   };
 
@@ -60,7 +62,15 @@ export const UserScreen = ({ history }) => {
             <th scope="col">email</th>
           </tr>
         </thead>
-        <tbody>{lstUser.map(ListUsers)}</tbody>
+        <tbody>
+          {lstUser.length >= 1 ? (
+            lstUser.map(ListUsers)
+          ) : (
+            <tr>
+              <td>Sin Datos</td>
+            </tr>
+          )}
+        </tbody>
       </table>
     </div>
   );

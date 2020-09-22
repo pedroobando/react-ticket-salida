@@ -1,6 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
-// import camelCase from 'camelcase';
+// import bcrypt from 'bcrypt';
 import { getStorage, setStorage } from '../data/dataStorage';
+// const bcrypt = require('bcrypt');
+// const saltRounds = 10;
+// const myPlaintextPassword = 's0//P4$$w0rD';
+// const someOtherPlaintextPassword = 'not_bacon';
 
 const table = 'user';
 
@@ -27,6 +31,11 @@ export const getOneUser = (userID) => {
 
 export const createUser = (user) => {
   try {
+    // // bcrypt password
+    // const salt = bcrypt.genSaltSync(saltRounds);
+    // const hash = bcrypt.hashSync(user.password, salt);
+    // console.log(hash);
+
     const listStorage = getStorage(table);
     const newUser = {
       _id: uuidv4(),
