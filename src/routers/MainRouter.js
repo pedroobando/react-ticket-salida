@@ -6,7 +6,7 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import { SalidaScreen } from '../components/salidas/SalidaScreen';
 
 import { PeopleScreen } from '../components/datas/PeopleScreen';
-import { PeopleEdit } from '../components/datas/PeopleEdit';
+import { PeopleCard } from '../components/datas/PeopleCard';
 import { UserScreen } from '../components/datas/UserScreen';
 
 export const MainRouter = () => {
@@ -18,7 +18,7 @@ export const MainRouter = () => {
           <Route exact path="/salida" component={SalidaScreen} />
 
           <Route exact path="/datos/persona" component={PeopleScreen} />
-          <Route path="/datos/persona/:id" component={PeopleEdit} />
+          <Route path="/datos/persona/:id" component={PeopleCard} />
           <Route exact path="/datos/usuario" component={UserScreen} />
 
           <Redirect to="/salida" />

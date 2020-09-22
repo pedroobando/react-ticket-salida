@@ -4,8 +4,9 @@ import { AppContext } from '../../reducers/AppContext';
 import { useForm } from '../../hooks/useForm';
 // import { globReducer } from '../../reducers/globReducer';
 import { typeGState } from '../../types/types';
+import { getStorage, setStorage } from '../../data/dataStorage';
 
-export const PeopleEdit = ({ history }) => {
+export const PeopleCard = ({ history }) => {
   const {
     globalState: { active },
     dispatch,
@@ -27,12 +28,33 @@ export const PeopleEdit = ({ history }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const getListPeople = getStorage('people');
+
+    if (active._id === 0) {
+      createNewPeople(getListPeople);
+    } else {
+      updatePeople(getListPeople);
+    }
+
+    history.goBack();
+  };
+
+  const createNewPeople = (list) => {
+    console.log(list);
+    dispatch({
+      type: typeGState.pplCreate,
+      payload: { active: formValues, list },
+    });
+    // setStorage('people', [formValues, ...list]);
+  };
+
+  const updatePeople = (list) => {
     dispatch({
       type: typeGState.pplUpdate,
-      payload: formValues,
+      payload: { active: formValues, list },
     });
-    history.goBack();
-    // console.log(formValues);
+    // setStorage('people', list);
   };
 
   const handleVolver = () => {

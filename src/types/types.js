@@ -2,10 +2,11 @@ export const typeGState = {
   login: '[auth] login',
   logout: '[auth] logout',
 
+  pplAddNew: '[peop] addnew',
   pplCreate: '[peop] create',
   pplRead: '[peop] reading',
-  pplUpdate: '[peop] Updating',
+  pplUpdate: '[peop] updating',
   pplDelete: '[peop] erasing',
   pplGetOne: '[peop] get One',
-  pplLists: '[peop] lista all',
+  pplLists: '[peop] list all',
 };

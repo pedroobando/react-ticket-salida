@@ -1,3 +1,4 @@
+import { setStorage } from '../data/dataStorage';
 import { typeGState } from '../types/types';
 
 // state = {
@@ -6,10 +7,6 @@ import { typeGState } from '../types/types';
 //   list:[],
 //   active:{}
 // };
-
-const removeItem = (id, list = []) => {
-  return list.filter((item) => item._id !== id);
-};
 
 export const globReducer = (state = {}, action) => {
   switch (action.type) {
@@ -28,28 +25,37 @@ export const globReducer = (state = {}, action) => {
       return {
         ...state,
         active: {},
+        list: action.payload,
       };
 
     case typeGState.pplGetOne:
       return {
         ...state,
-        active: action.payload.active,
-        list: action.payload.list,
+        active: action.payload,
+      };
+
+    case typeGState.pplAddNew:
+      return {
+        ...state,
+        list: [],
+        active: {},
       };
 
     case typeGState.pplCreate:
+      setStorage('people', [action.payload.active, ...action.payload.list]);
       return {
         ...state,
-        list: [...state.list, action.payload],
+        list: [action.payload.active, ...action.payload.list],
         active: {},
       };
 
     case typeGState.pplUpdate:
-      const { _id } = action.payload;
-      const newList = state.list.filter((item) => item._id !== _id);
+      const { _id } = action.payload.active;
+      const newList = action.payload.list.filter((item) => item._id !== _id);
+      setStorage('people', [action.payload.active, ...newList]);
       return {
         ...state,
-        list: [action.payload, ...newList],
+        list: [action.payload.active, ...newList],
         active: {},
       };
 

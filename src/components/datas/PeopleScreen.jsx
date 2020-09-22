@@ -1,55 +1,86 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { getStorage } from '../../data/dataStorage';
 import { AppContext } from '../../reducers/AppContext';
 import { typeGState } from '../../types/types';
 
-const peopleData = [
-  {
-    _id: 23232323,
-    name: 'Juan Carlos',
-    dni: '3232323',
-    phone: '032-323232',
-    approver: true,
-    coments: 'Algun comentario',
-    transBrand: 'Toyota',
-    transColor: 'Plata',
-    transModel: 'Meru',
-    transPlaca: 'NAU-39K',
-  },
-  {
-    _id: 244323,
-    name: 'Luis Martinez',
-    dni: '3232323',
-    phone: '032-323232',
-    approver: false,
-    coments: 'tario',
-    transBrand: 'Chevroolet',
-    transColor: 'Azul',
-    transModel: 'Monza',
-    transPlaca: 'GTE-39K',
-  },
-  {
-    _id: 24432223,
-    name: 'Francisco Perez',
-    dni: '3232323',
-    phone: '032-323232',
-    approver: true,
-    coments: 'Comentario true',
-    transBrand: 'Toyota',
-    transColor: 'Gris',
-    transModel: 'Starlet',
-    transPlaca: 'BAH-12P',
-  },
-];
+// const peopleData = [
+//   {
+//     _id: 23232323,
+//     name: 'Juan Carlos',
+//     dni: '3232323',
+//     phone: '032-323232',
+//     approver: true,
+//     coments: 'Algun comentario',
+//     transBrand: 'Toyota',
+//     transColor: 'Plata',
+//     transModel: 'Meru',
+//     transPlaca: 'NAU-39K',
+//   },
+//   {
+//     _id: 244323,
+//     name: 'Luis Martinez',
+//     dni: '3232323',
+//     phone: '032-323232',
+//     approver: false,
+//     coments: 'tario',
+//     transBrand: 'Chevroolet',
+//     transColor: 'Azul',
+//     transModel: 'Monza',
+//     transPlaca: 'GTE-39K',
+//   },
+//   {
+//     _id: 24432223,
+//     name: 'Francisco Perez',
+//     dni: '3232323',
+//     phone: '032-323232',
+//     approver: true,
+//     coments: 'Comentario true',
+//     transBrand: 'Toyota',
+//     transColor: 'Gris',
+//     transModel: 'Starlet',
+//     transPlaca: 'BAH-12P',
+//   },
+// ];
 
 export const PeopleScreen = ({ history }) => {
   const { dispatch } = useContext(AppContext);
 
+  const [lstPeople, setLstPeople] = useState([]);
+
+  useEffect(() => {
+    loadTable();
+  }, []);
+
+  const loadTable = () => {
+    setLstPeople(getStorage('people'));
+  };
+
+  const handleAddNew = () => {
+    // const peopleItem = {
+    //   _id: 0,
+    //   name: '',
+    //   dni: '',
+    //   phone: '',
+    //   approver: false,
+    //   coments: '',
+    //   transBrand: '',
+    //   transColor: '',
+    //   transModel: '',
+    //   transPlaca: '',
+    // };
+    dispatch({
+      type: typeGState.pplAddNew,
+      payload: lstPeople,
+    });
+    history.push(`/datos/persona/nuevo`);
+  };
+
   const handleSelect = (peopleID) => {
-    const peopleItem = peopleData.find((item) => item._id === peopleID);
+    const peopleItem = lstPeople.find((item) => item._id === peopleID);
     dispatch({
       type: typeGState.pplGetOne,
-      payload: { active: peopleItem, list: peopleData },
+      payload: { active: peopleItem, list: lstPeople },
     });
     history.push(`/datos/persona/${peopleID}`);
   };
@@ -68,7 +99,12 @@ export const PeopleScreen = ({ history }) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-end mr-2">
+      <div className="d-flex justify-content-between mx-2 mb-2">
+        <button
+          className="btn btn-outline-primary btn-sm"
+          onClick={(event) => handleAddNew()}>
+          Nuevo
+        </button>
         <span className="h3">Personas / Aprobadores</span>
       </div>
 
@@ -82,7 +118,7 @@ export const PeopleScreen = ({ history }) => {
             <th></th>
           </tr>
         </thead>
-        <tbody>{peopleData.map(ListPeoples)}</tbody>
+        <tbody>{lstPeople.map(ListPeoples)}</tbody>
       </table>
     </div>
   );
