@@ -5,7 +5,12 @@ import validator from 'validator';
 import { AppContext } from '../../reducers/AppContext';
 import { useForm } from '../../hooks/useForm';
 import { typeGState } from '../../types/types';
-import { createUser, deleteUser, updateUser } from '../../actions/userAction';
+import {
+  createUser,
+  deleteUser,
+  getOneByUsername,
+  updateUser,
+} from '../../actions/userAction';
 
 export const UserCard = ({ history }) => {
   const {
@@ -17,10 +22,24 @@ export const UserCard = ({ history }) => {
 
   const { username, email, password, password2 } = formValues;
 
+  const takeUsername = (usernameSeek = '', update = false) => {
+    let retVal = false;
+    const existUsername = getOneByUsername(usernameSeek);
+    if (existUsername !== undefined && existUsername._id !== active._id) retVal = true;
+    // console.log(existUsername._id, active._id);
+    return retVal;
+  };
+
   const isFormValid = () => {
     let alertForm = [];
+    // console.log(active._id);
+    const isUpdate = active._id !== 0;
+
     if (username === undefined || username.trim().length <= 4) {
       alertForm = [...alertForm, 'Username 5 o mas caracteres'];
+    }
+    if (takeUsername(username)) {
+      alertForm = [...alertForm, `Username ${username} ya existe`];
     }
     if (email === undefined || !validator.isEmail(email.trim())) {
       alertForm = [...alertForm, 'E-mail no valido.'];

@@ -1,10 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-// import bcrypt from 'bcrypt';
 import { getStorage, setStorage } from '../data/dataStorage';
-// const bcrypt = require('bcrypt');
-// const saltRounds = 10;
-// const myPlaintextPassword = 's0//P4$$w0rD';
-// const someOtherPlaintextPassword = 'not_bacon';
 
 const table = 'user';
 
@@ -15,7 +10,6 @@ export const listUser = () => {
   } catch (err) {
     console.error('listUser - ', err.message);
     return [];
-    // throw err;
   }
 };
 
@@ -29,14 +23,26 @@ export const getOneUser = (userID) => {
   }
 };
 
+export const getOneByUsername = (username) => {
+  try {
+    const listStorage = getStorage(table);
+    return listStorage.find((item) => item.username === username.trim());
+  } catch (err) {
+    console.error('getOneUser - ', err.message);
+    throw err;
+  }
+};
+
 export const createUser = (user) => {
   try {
-    // // bcrypt password
-    // const salt = bcrypt.genSaltSync(saltRounds);
-    // const hash = bcrypt.hashSync(user.password, salt);
-    // console.log(hash);
-
+    // const { username } = user;
     const listStorage = getStorage(table);
+
+    // const existUsername = listStorage.find((item) => item.username === username.trim());
+    // if (existUsername.username === username) {
+    //   throw new Error(`El nombre del usuario ${username} esta tomado`);
+    // }
+
     const newUser = {
       _id: uuidv4(),
       username: user.username.trim().toLowerCase(),

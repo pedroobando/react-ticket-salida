@@ -13,8 +13,6 @@ export const UserScreen = ({ history }) => {
 
   const loadTable = () => {
     let lista = listUser();
-    console.log(lista);
-
     setLstUser(lista);
   };
 

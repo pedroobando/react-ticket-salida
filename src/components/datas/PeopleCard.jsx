@@ -196,19 +196,25 @@ export const PeopleCard = ({ history }) => {
       <Form className="my-2" onSubmit={handleSubmit}>
         <ul className="nav nav-tabs">
           <li onClick={(event) => handleTabPeople(1)} className="nav-item">
-            <a className={tabSelect === 1 ? 'nav-link active' : 'nav-link'}>
+            <button
+              type="button"
+              className={tabSelect === 1 ? 'nav-link active' : 'nav-link '}>
               Datos Personales
-            </a>
+            </button>
           </li>
           <li onClick={(event) => handleTabPeople(2)} className="nav-item">
-            <a className={tabSelect === 2 ? 'nav-link active' : 'nav-link'}>
+            <button
+              type="button"
+              className={tabSelect === 2 ? 'nav-link active' : 'nav-link'}>
               Datos Vehiculo
-            </a>
+            </button>
           </li>
           <li onClick={(event) => handleTabPeople(3)} className="nav-item">
-            <a className={tabSelect === 3 ? 'nav-link active' : 'nav-link'}>
+            <button
+              type="button"
+              className={tabSelect === 3 ? 'nav-link active' : 'nav-link'}>
               Otros Datos
-            </a>
+            </button>
           </li>
         </ul>
 
