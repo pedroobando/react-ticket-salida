@@ -22,7 +22,7 @@ export const UserCard = ({ history }) => {
 
   const { username, email, password, password2 } = formValues;
 
-  const takeUsername = (usernameSeek = '', update = false) => {
+  const takeUsername = (usernameSeek = '') => {
     let retVal = false;
     const existUsername = getOneByUsername(usernameSeek);
     if (existUsername !== undefined && existUsername._id !== active._id) retVal = true;
@@ -32,8 +32,6 @@ export const UserCard = ({ history }) => {
 
   const isFormValid = () => {
     let alertForm = [];
-    // console.log(active._id);
-    const isUpdate = active._id !== 0;
 
     if (username === undefined || username.trim().length <= 4) {
       alertForm = [...alertForm, 'Username 5 o mas caracteres'];
