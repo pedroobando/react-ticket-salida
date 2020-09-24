@@ -6,6 +6,8 @@ import { typeGState } from '../../types/types';
 import { createPeople, deletePeople, updatePeople } from '../../actions/peopleAction';
 
 export const PeopleCard = ({ history }) => {
+  const pepe = 2;
+
   const [tabSelect, setTabSelect] = useState(1);
   // const tabSelect = useRef(1);
   const {
